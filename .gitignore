@@ -1,0 +1,28 @@
+# Dependencias
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+
+# Variables de entorno (¡NUNCA SUBIR CLAVES REALES!)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Foundry
+cache/
+out/
+broadcast/
+.solhint.json
+gas-report.txt
+*.1
+
+# Varios
+.DS_Store
+*.log
+coverage/
+coverage.json
