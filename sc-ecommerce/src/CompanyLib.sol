@@ -31,4 +31,26 @@ library CompanyLib {
         require(self.companies[_companyId].isActive, "CompanyLib: Inactive or non-existent company");
         return self.companies[_companyId];
     }
+
+    function getCompanyCount(State storage self) internal view returns (uint256) {
+        return self.nextCompanyId;
+    }
+
+    function getAllCompanies(State storage self) internal view returns (Company[] memory) {
+        uint256 activeCount = 0;
+        for (uint256 i = 0; i < self.nextCompanyId; i++) {
+            if (self.companies[i].isActive) activeCount++;
+        }
+        
+        Company[] memory activeCompanies = new Company[](activeCount);
+        uint256 idx = 0;
+        
+        for (uint256 i = 0; i < self.nextCompanyId; i++) {
+            if (self.companies[i].isActive) {
+                activeCompanies[idx] = self.companies[i];
+                idx++;
+            }
+        }
+        return activeCompanies;
+    }
 }

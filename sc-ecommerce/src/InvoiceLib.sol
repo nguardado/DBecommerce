@@ -32,4 +32,21 @@ library InvoiceLib {
     function getInvoice(State storage self, uint256 _invoiceId) internal view returns (Invoice memory) {
         return self.invoices[_invoiceId];
     }
+
+    function getInvoicesByCustomer(State storage self, address _customer) internal view returns (Invoice[] memory) {
+        uint256 count = 0;
+        for (uint256 i = 0; i < self.nextInvoiceId; i++) {
+            if (self.invoices[i].customerAddress == _customer) count++;
+        }
+        
+        Invoice[] memory result = new Invoice[](count);
+        uint256 idx = 0;
+        for (uint256 i = 0; i < self.nextInvoiceId; i++) {
+            if (self.invoices[i].customerAddress == _customer) {
+                result[idx] = self.invoices[i];
+                idx++;
+            }
+        }
+        return result;
+    }
 }

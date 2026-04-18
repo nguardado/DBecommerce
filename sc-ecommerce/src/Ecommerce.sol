@@ -46,6 +46,10 @@ contract Ecommerce {
         return CompanyLib.getCompany(companyState, _companyId);
     }
     
+    function getAllCompanies() external view returns (Company[] memory) {
+        return CompanyLib.getAllCompanies(companyState);
+    }
+
     // ==========================================
     // SECCION: PRODUCTOS
     // ==========================================
@@ -114,6 +118,10 @@ contract Ecommerce {
 
     function getInvoice(uint256 _invoiceId) external view returns (Invoice memory) {
         return InvoiceLib.getInvoice(invoiceState, _invoiceId);
+    }
+
+    function getInvoicesByCustomer(address _customer) external view returns (Invoice[] memory) {
+        return InvoiceLib.getInvoicesByCustomer(invoiceState, _customer);
     }
 
     // ==========================================
